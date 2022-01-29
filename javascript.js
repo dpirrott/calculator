@@ -15,17 +15,53 @@ const sum = function(numbers) {
 };
 
 const multiply = function(numbers) {
-  let multiply = 1;
-  numbers.forEach(number => {
-    multiply *= number;
+  let multiply = numbers[0];
+  numbers.forEach((number, index) => {
+    if (index > 0) {
+      multiply *= number;
+    }
   });
   return multiply;
 };
+
+const divide = function(x, y) {
+  if (y === 0) { 
+    return "Error"
+  } else {
+    return x / y;
+  }
+}
 
 const power = function(x, y) {
 	return Math.pow(x, y);
 };
 
+const operate = function(x, y, operator) {
+  switch(operator) {
+    case "add":
+      return add(x, y);
+    case "subtract":
+      return subtract(x, y);
+    case "multiply":
+      return multiply(x, y);
+    case "divide":
+      return divide(x, y);
+  }
+}
+
+const displayWriter = function(value) {
+  // Update display paragraph with value
+}
+
+const setupEventListeners = function() {
+
+}
+
+let displayValue = "";
+const numbers = document.getElementsByClassName("number");
+
+
+setupEventListeners();
 // const factorial = function(x) {
 // 	let fact = 1;
 //   if (x == 0 && x == 1) {
