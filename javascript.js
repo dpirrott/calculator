@@ -14,14 +14,8 @@ const sum = function(numbers) {
   return sum;
 };
 
-const multiply = function(numbers) {
-  let multiply = numbers[0];
-  numbers.forEach((number, index) => {
-    if (index > 0) {
-      multiply *= number;
-    }
-  });
-  return multiply;
+const multiply = function(x, y) {
+  return x * y;
 };
 
 const divide = function(x, y) {
@@ -39,37 +33,98 @@ const power = function(x, y) {
 const operate = function(x, y, operator) {
   switch(operator) {
     case "add":
-      return add(x, y);
+      return add(Number(x), Number(y));
     case "subtract":
-      return subtract(x, y);
+      return subtract(Number(x), Number(y));
     case "multiply":
-      return multiply(x, y);
+      return multiply(Number(x), Number(y));
     case "divide":
-      return divide(x, y);
+      return divide(Number(x), Number(y));
   }
 }
 
+const executeFinalCalc = function() {
+  if(displayValue !== "") {
+    result = operate(calcData.number, displayValue, calcData.operation);
+    displayValue = "";
+    displayWriter(result);
+    calcData.number = "";
+    calcData.operation = "reset"; 
+  }
+}
+
+// const executeMiddleCalc = function(x, y, operation) {
+//   result = operate(x, y, operation);
+//   displayValue = "";
+//   displayWriter(result);
+// }
+
+const storeAndClear = function(e) {
+  
+  if (calcData.number === "") {
+    calcData.number = displayValue;
+    calcData.operation = e.srcElement.id;
+    displayValue = "";
+  } else {
+    
+    if (displayValue == "") {
+      console.log(displayValue);
+      clearDisplayAndData();
+      displayValue = "Error";
+      displayWriter(displayValue);
+    }else{
+      calcData.number = operate(calcData.number, displayValue, calcData.operation);
+      displayValue = "";
+      calcData.operation = e.srcElement.id;
+      displayWriter(calcData.number);
+    }
+  }
+}
+
+const clearDisplay = function() {
+  displayValue = "";
+  displayWriter(displayValue);
+}
+
+const clearDisplayAndData = function() {
+  clearDisplay();
+  calcData.number = "";
+  calcData.operation = "";
+}
+
 const displayWriter = function(value) {
-  // Update display paragraph with value
+  display.innerText = value === "Error" ? "Error" : String(value).slice(0, 14);
+}
+
+const combineNumber = function(e) {
+  tempNumber = e.srcElement.innerText;
+  displayValue += tempNumber;
+  displayWriter(displayValue);
 }
 
 const setupEventListeners = function() {
-
+  numbers.forEach(number => {
+    number.addEventListener('click', combineNumber);
+  });
+  clearBtn.addEventListener('click', clearDisplayAndData)
+  operations.forEach(operation => {
+    operation.addEventListener('click', storeAndClear);
+  });
+  equalsBtn.addEventListener('click', executeFinalCalc)
 }
 
 let displayValue = "";
-const numbers = document.getElementsByClassName("number");
+let tempNumber = "";
+let calcData = {
+  number: "",
+  operation: ""
+};
+let result = 0;
 
+let display = document.querySelector('#display');
+const numbers = document.querySelectorAll(".number");
+const clearBtn = document.querySelector('#clear');
+const operations = document.querySelectorAll('.operation');
+const equalsBtn = document.querySelector('#equal');
 
 setupEventListeners();
-// const factorial = function(x) {
-// 	let fact = 1;
-//   if (x == 0 && x == 1) {
-//     return 1;
-//   } else {
-//     for(let i = x; i >= 1; i-- ){
-//       fact *= i;
-//     }
-//   }
-//   return fact;
-// };
