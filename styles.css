@@ -75,3 +75,7 @@ body {
   background-color: rgb(74, 77, 85);
   color: white;
 }
+
+#neg {
+  color: black;
+}
