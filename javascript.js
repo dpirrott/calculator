@@ -49,7 +49,6 @@ const executeFinalCalc = function() {
     displayValue = result;
     displayWriter(result);
     calcData.number = "";
-    
     calcData.operation = "reset"; 
   }
 }
@@ -60,14 +59,13 @@ const storeAndClear = function(e) {
     calcData.number = displayValue;
     calcData.operation = e.srcElement.id;
     displayValue = "";
-  } else {
-    //calcData.operation = e.srcElement.id;
-    if (displayValue !== "") {
+  } else if (displayValue !== "") {
       calcData.number = operate(calcData.number, displayValue, calcData.operation);
       displayValue = "";
       calcData.operation = e.srcElement.id;
       displayWriter(calcData.number);
-    }
+  } else {
+    calcData.operation = e.srcElement.id;
   }
 }
 
@@ -135,8 +133,8 @@ let calcData = {
   number: "",
   operation: ""
 };
-let result = 0;
 
+let result = 0;
 let display = document.querySelector('#display');
 const numbers = document.querySelectorAll(".number");
 const clearBtn = document.querySelector('#clear');
@@ -145,5 +143,4 @@ const equalsBtn = document.querySelector('#equal');
 const negBtn = document.querySelector('#neg');
 const dotBtn = document.querySelector('#dot');
 const deleteBtn = document.querySelector('#delete');
-
 setupEventListeners();
