@@ -122,7 +122,7 @@ const setupEventListeners = function() {
   });
   equalsBtn.addEventListener('click', executeFinalCalc);
   negBtn.addEventListener('click', toggleNegativeDisplay);
-  deleteBtn.addEventListener('click', removeNumber)
+  deleteBtn.addEventListener('click', removeNumber);
 }
 
 let displayValue = "";
