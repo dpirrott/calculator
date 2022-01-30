@@ -61,7 +61,7 @@ const storeAndClear = function(e) {
     calcData.operation = e.srcElement.id;
     displayValue = "";
   } else {
-    calcData.operation = e.srcElement.id;
+    //calcData.operation = e.srcElement.id;
     if (displayValue !== "") {
       calcData.number = operate(calcData.number, displayValue, calcData.operation);
       displayValue = "";
@@ -72,7 +72,9 @@ const storeAndClear = function(e) {
 }
 
 const toggleNegativeDisplay = function() {
+  console.log(displayValue);
   displayValue = displayValue - 2 * displayValue;
+  console.log(displayValue);
   displayWriter(displayValue);
 }
 
@@ -89,6 +91,7 @@ const clearDisplayAndData = function() {
 
 const displayWriter = function(value) {
   display.innerText = value === "Error" ? "Error" : String(value).slice(0, 9);
+  console.log(displayValue);
 }
 
 const removeNumber = function() {
@@ -109,6 +112,7 @@ const combineNumber = function(e) {
   tempNumber = e.srcElement.innerText;
   if (tempNumber === ".") dotBtn.disabled = true;
   displayValue += tempNumber;
+  console.log(displayValue);
   displayWriter(displayValue);
 }
 
@@ -118,7 +122,7 @@ const setupEventListeners = function() {
   });
   clearBtn.addEventListener('click', clearDisplayAndData);
   operations.forEach(operation => {
-    operation.addEventListener('click', storeAndClear);
+    if (operation.id !== "neg") operation.addEventListener('click', storeAndClear);
   });
   equalsBtn.addEventListener('click', executeFinalCalc);
   negBtn.addEventListener('click', toggleNegativeDisplay);
