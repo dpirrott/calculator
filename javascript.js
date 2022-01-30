@@ -46,10 +46,10 @@ const operate = function(x, y, operator) {
 const executeFinalCalc = function() {
   if(displayValue !== "") {
     result = operate(calcData.number, displayValue, calcData.operation);
-    displayValue = "";
+    displayValue = result;
     displayWriter(result);
     calcData.number = "";
-    calcData.operation = "reset"; 
+    // calcData.operation = "reset"; 
   }
 }
 
@@ -66,13 +66,8 @@ const storeAndClear = function(e) {
     calcData.operation = e.srcElement.id;
     displayValue = "";
   } else {
-    
-    if (displayValue == "") {
-      console.log(displayValue);
-      clearDisplayAndData();
-      displayValue = "Error";
-      displayWriter(displayValue);
-    }else{
+    calcData.operation = e.srcElement.id;
+    if (displayValue !== "") {
       calcData.number = operate(calcData.number, displayValue, calcData.operation);
       displayValue = "";
       calcData.operation = e.srcElement.id;
