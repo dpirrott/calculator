@@ -9,31 +9,62 @@
   flex-direction: column;
   align-items: center;
   width: 600px;
-  height: 800px;
+  height: 700px;
+  padding: 20px;
   margin: 50px auto;
+  gap: 10px;
+  background-color: rgba(0, 0, 0, 0.842);
+  border-radius: 20px;
 }
 
 #display {
   font-size: 100px;
   height: 100px;
   display: inline-block;
+  font-family: 'Roboto', sans-serif;
+  
 }
 
 .row {
   display: flex;
   width: 100%;
   justify-content: center;
+  gap: 10px;
   flex: 1;
 }
 
 #displayContainer {
   justify-content: flex-start;
   align-items: center;
+  background-color: rgb(141, 185, 143);
+  margin-bottom: 10px;
+  border-radius: 10px;
 }
-
-
 
 .row-item { 
   flex: 1;
   font-size: 32px;
+  border-radius: 10px;
+}
+
+#delete {
+  flex: 2.3 1 0;
+  background-color: firebrick;
+}
+
+#clear {
+  background-color: gold;
+}
+
+#equal { 
+  background-color: rgb(72, 149, 0);
+}
+
+.number {
+  background-color: #f4f4f4;
+}
+
+.operation {
+  background-color: rgb(74, 77, 85);
+  color: white;
 }
